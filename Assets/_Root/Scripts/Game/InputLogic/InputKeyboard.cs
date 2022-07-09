@@ -4,12 +4,8 @@ using UnityEngine;
 namespace Game.InputLogic
 {
     internal class InputKeyboard : BaseInputView
-    {
-        private const string Horizontal = nameof(Horizontal);
-        private const string Vertical = nameof(Vertical);
-
-        [SerializeField]
-        private float _speedCar = 0.08f;
+    {       
+        [SerializeField] private float _inputMultiplier = 0.01f;
 
         private void Start() =>
             UpdateManager.SubscribeToUpdate(Move);
@@ -20,13 +16,14 @@ namespace Game.InputLogic
 
         private void Move()
         {
-            var xAxisInput = Input.GetAxis(Horizontal);
-            var yAxisInput = Input.GetAxis(Vertical);
+            float moveValue = _speed * _inputMultiplier *Time.deltaTime;            
 
-            if (xAxisInput > 0)
-            {
-                Vector3 movment = new Vector3(xAxisInput, 0, 0) * Time.deltaTime;
-            }           
+            if(Input.GetKey(KeyCode.LeftArrow))
+                OnLeftMove(moveValue);
+
+            if(Input.GetKey(KeyCode.RightArrow))
+                OnRightMove(moveValue);
+            
         }
     }
 }
