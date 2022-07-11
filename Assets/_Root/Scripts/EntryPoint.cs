@@ -2,6 +2,7 @@ using Profile;
 using Services.Analytics;
 using UnityEngine;
 using Services.Ads.UnityAds;
+using Services.IAP;
 
 
 internal class EntryPoint : MonoBehaviour
@@ -12,6 +13,7 @@ internal class EntryPoint : MonoBehaviour
     [SerializeField] private Transform _placeForUi;
     [SerializeField] private AnalyticsManager _analytics;
     [SerializeField] private UnityAdsService _adsService;
+    [SerializeField] private IAPService _iapService;
 
     private MainController _mainController;
 
@@ -25,13 +27,18 @@ internal class EntryPoint : MonoBehaviour
 
         if (_adsService.IsInitialized) OnAdsInitialized();
         else _adsService.Initialized.AddListener(OnAdsInitialized);
+
+        if (_iapService.IsInitialized) OnIapInitialized();
+        else _iapService.Initialized.AddListener(OnIapInitialized);
     }
 
     private void OnDestroy()
     {
-        _adsService.Initialized.RemoveListener(OnAdsInitialized);        
+        _adsService.Initialized.RemoveListener(OnAdsInitialized);
+        _iapService.Initialized.RemoveListener(OnIapInitialized);
         _mainController.Dispose();
     }
 
     private void OnAdsInitialized() => _adsService.InterstitialPlayer.Play();
+    private void OnIapInitialized() => _iapService.Buy("Gold");
 }

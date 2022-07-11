@@ -1,11 +1,10 @@
-using UnityEngine.Advertisements;
+﻿using UnityEngine.Advertisements;
 
 namespace Services.Ads.UnityAds
 {
-    internal sealed class InterstitialPlayer : UnityAdsPlayer
+    internal class RewardedPlayer : UnityAdsPlayer
     {
-        public InterstitialPlayer(string id) : base(id) { }
-
+        public RewardedPlayer(string id) : base(id) {}
         protected override void OnPlaying() => Advertisement.Show(Id);
         protected override void Load() => Advertisement.Load(Id);
     }
