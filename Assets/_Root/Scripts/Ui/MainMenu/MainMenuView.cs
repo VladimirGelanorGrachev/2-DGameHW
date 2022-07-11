@@ -8,6 +8,8 @@ namespace Ui
     {
         [SerializeField] private Button _buttonStart;
         [SerializeField] private Button _buttonSettings;
+        [SerializeField] private Button _rewardButton;
+        [SerializeField] private Button _bayButton;
         public void Init(UnityAction startGame, UnityAction openSettings)
         {
             _buttonStart.onClick.AddListener(startGame);

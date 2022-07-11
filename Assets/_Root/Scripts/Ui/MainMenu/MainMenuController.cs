@@ -31,7 +31,9 @@ namespace Ui
         private void StartGame() =>
             _profilePlayer.CurrentState.Value = GameState.Game;
 
-        private void OpenSettings() =>
+        private void OpenSettings()
+        {
             _profilePlayer.CurrentState.Value = GameState.Settings;
+        }
     }
 }

@@ -8,6 +8,7 @@ namespace Game
 {
     internal class GameController : BaseController
     {
+        
         public GameController(ProfilePlayer profilePlayer)
         {
             var leftMoveDiff = new SubscriptionProperty<float>();
@@ -20,7 +21,7 @@ namespace Game
             AddController(inputGameController);
 
             var carController = new CarController();
-            AddController(carController);
+            AddController(carController);            
         }
     }
 }
